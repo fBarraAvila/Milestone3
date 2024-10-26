@@ -6,6 +6,7 @@
 //
 
 #include <stdio.h>
+#include <vector>
 #include "HashTable.hpp"
 
 HashTable::HashTable(){
@@ -25,6 +26,10 @@ bool HashTable::isEmpty(){
     
     return numberOfItems == 0;
 }
+// getNumberOfItems
+int HashTable::getNumberOfItems(){
+    return numberOfItems;
+}
 
 // add(searchKey, newItem)
 bool HashTable::add(int searchKey, HashNode* newItem){
@@ -38,6 +43,7 @@ bool HashTable::add(int searchKey, HashNode* newItem){
         //adds at the head
         currentNode->prev = newItem;
         newItem->next = currentNode;
+        table[tableIndex] = newItem;
         // adds at the tail
 //        while(currentNode->next != nullptr){
 //            currentNode = currentNode->next;
@@ -55,9 +61,65 @@ bool HashTable::remove(int searchKey){
     int tableIndex = searchKey % _HASH_TABLE_SIZE;
     HashNode* currentNode = table[tableIndex];
     
+    while(currentNode != nullptr && currentNode->key != searchKey){
+        currentNode = currentNode->next;
+    }
+    
+    // check if searchKey was found in bucket
+    if(currentNode == nullptr){
+        return false;
+    }
+    // check if searchKey is found at head, updates the list by removing the head
+    // and table[i] points to new head
+    if(currentNode->prev == nullptr){
+        table[tableIndex] = currentNode->next;
+        if(table[tableIndex] != nullptr){
+            table[tableIndex]-> prev = nullptr;
+        }
+    }
+    // check if searchKey is found at tail
+    else if(currentNode->next == nullptr){
+        currentNode->prev->next = nullptr;
+        //delete currentNode;
+    }
+    // check if searchKey is found in the body of list
+    else{
+        currentNode->prev->next = currentNode->next;
+        currentNode->next->prev = currentNode->next;
+        //delete currentNode;
+    }
+    delete currentNode;
+    numberOfItems--;
+    return true;
     
     
 }
 
-//// clear()
-//void clear();
+// clear()
+void HashTable::clear(){
+    HashNode* current = nullptr;
+    HashNode* nodeToDelete = nullptr;
+    for(int i = 0; i < _HASH_TABLE_SIZE; i++){
+        if(table[i] != nullptr){
+            current = table[i];
+            while(current != nullptr){
+                nodeToDelete = current;
+                current = current->next;
+                delete nodeToDelete;
+            }
+        }
+        table[i] = nullptr;
+    }
+    numberOfItems = 0;
+}
+
+// getItem(int)
+HashNode* HashTable::getItem(int searchKey){
+    
+    return nullptr;
+}
+
+// contains(int)
+bool HashTable::contains(int searchKey){
+    return false;
+}
