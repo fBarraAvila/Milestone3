@@ -10,6 +10,11 @@
 #define _HASH_TABLE
 #define _HASH_TABLE_SIZE 101
 
+// added string and vector headers
+#include <string>
+#include <vector>
+
+
 using IntVector = std::vector<int>;
 
 // Define a structure for a node in the hash table
@@ -60,30 +65,39 @@ public:
 	*/
 
 	// getTable
+	// done
 	HashNode** getTable();
 
 	// getSize
+	// done
 	int getSize();
 
 	// isEmpty
+	// done
 	bool isEmpty();
 
 	// getNumberOfItems
+	// done
 	int getNumberOfItems();
 
 	// add(searchKey, newItem)
+	// done
 	bool add(int, HashNode*);
 
 	// remove(int)
+	// done
 	bool remove(int);
 
 	// clear()
+	// done
 	void clear();
 
 	// getItem(int)
+	// done
 	HashNode* getItem(int);
 
 	// contains(int)
+	// done
 	bool contains(int);
 }; // end HashTable
 

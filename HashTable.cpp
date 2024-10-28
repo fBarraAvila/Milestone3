@@ -114,12 +114,42 @@ void HashTable::clear(){
 }
 
 // getItem(int)
+// returns the hashnode at the given index
 HashNode* HashTable::getItem(int searchKey){
-    
+    // get the hash bucket and the current node to traverse the bucket
+    int tableIndex = searchKey % _HASH_TABLE_SIZE;
+    HashNode* currentNode = table[tableIndex];
+
+    // traverse bucket
+    while(currentNode != nullptr){
+        // if current searchKey exists in our hashtable
+        if(searchKey == currentNode -> key){
+            return currentNode;
+        }
+        currentNode = currentNode -> next;
+    }
+
+    // if we cant find the key
     return nullptr;
 }
 
+
 // contains(int)
 bool HashTable::contains(int searchKey){
+    // get the hash bucket and the current node to traverse the bucket
+    int tableIndex = searchKey % _HASH_TABLE_SIZE;
+    HashNode* currentNode = table[tableIndex];
+
+    // traverse bucket
+    while(currentNode != nullptr){
+        // if current searchKey exists in our hashtable
+        if(searchKey == currentNode -> key){
+            return true;
+        }
+        currentNode = currentNode -> next;
+    }
+
+    // if we cant find the key
     return false;
+
 }
