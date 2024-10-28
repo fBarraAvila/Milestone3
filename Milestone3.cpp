@@ -46,7 +46,25 @@ void processTestCase(HashTable* hashTable, const std::string& testCaseName, cons
             const std::string& actionName = it.key();
             const json& details = it.value();
 
-            if (actionName == "add") {
+            if (actionName == "isEmpty") {
+                bool result = hashTable->isEmpty();
+                std::cout << "isEmpty: " << result << std::endl;
+            }
+            else if (actionName == "contains") {
+                int key = details["key"];
+                bool result = hashTable->contains(key);
+                std::cout << "contains(" << key << "): " << result << std::endl;
+            }
+            else if (actionName == "getItem") {
+                int key = details["key"];
+                HashNode* result = hashTable->getItem(key);
+                std::cout << "getItem(" << key << "): " << result << std::endl;
+            }
+            else if (actionName == "getNumberOfItems") {
+                int result = hashTable->getNumberOfItems();
+                std::cout << "getNumberOfItems: " << result << std::endl;
+            }
+            else if (actionName == "add") {
                 HashNode* newNode = new HashNode(details["key"], details["fullName"], details["address"], details["city"], details["state"], details["zip"]);
                 hashTable->add(details["key"], newNode);
             }
@@ -116,7 +134,7 @@ int main() {
     HashTable* hashTable = new HashTable();
 
     // Load the JSON file
-    std::ifstream inputFile("/Users/francobarra/xcode_projects/CSC340/week_9/Milestone3/Milestone3");
+    std::ifstream inputFile("milestone3.json");
     if (!inputFile.is_open()) {
         std::cerr << "Failed to open the file.\n";
         return 1;
