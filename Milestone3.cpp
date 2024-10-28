@@ -4,7 +4,7 @@
 *
 * 09/23/24 - Created by ChatGPT with prompt "write C++ program reads and parses the file: milestone3.json"
 *            The file: "milestones3.json" is in the following format:
-* 
+*
 
 {
     "hashTable": [
