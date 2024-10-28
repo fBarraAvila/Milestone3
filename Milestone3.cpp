@@ -116,7 +116,7 @@ int main() {
     HashTable* hashTable = new HashTable();
 
     // Load the JSON file
-    std::ifstream inputFile("milestone3.json");
+    std::ifstream inputFile("/Users/francobarra/xcode_projects/CSC340/week_9/Milestone3/Milestone3");
     if (!inputFile.is_open()) {
         std::cerr << "Failed to open the file.\n";
         return 1;

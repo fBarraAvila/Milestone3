@@ -139,7 +139,7 @@ bool HashTable::contains(int searchKey){
     // get the hash bucket and the current node to traverse the bucket
     int tableIndex = searchKey % _HASH_TABLE_SIZE;
     HashNode* currentNode = table[tableIndex];
-
+    
     // traverse bucket
     while(currentNode != nullptr){
         // if current searchKey exists in our hashtable
@@ -148,8 +148,7 @@ bool HashTable::contains(int searchKey){
         }
         currentNode = currentNode -> next;
     }
-
+    
     // if we cant find the key
     return false;
-
 }
