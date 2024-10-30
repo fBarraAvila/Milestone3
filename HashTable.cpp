@@ -10,7 +10,14 @@
 #include "HashTable.hpp"
 
 HashTable::HashTable(){
+    // doing this will set a garbage value (not nullptr) for each entry
+    // Learned from ChatGPT
     table = new HashNode*[_HASH_TABLE_SIZE];
+    // Initialize each entry to nullptr
+    for (int i = 0; i < _HASH_TABLE_SIZE; i++) {
+        table[i] = nullptr; 
+    }
+
     numberOfItems = 0;
 }
 
@@ -37,10 +44,11 @@ bool HashTable::add(int searchKey, HashNode* newItem){
     HashNode* currentNode = table[tableIndex];
     
     if(table[tableIndex] == nullptr){
+        //if table entry is empty
         table[tableIndex] = newItem;
     }
     else{
-        //adds at the head
+        //adds at the head of the bucket
         currentNode->prev = newItem;
         newItem->next = currentNode;
         table[tableIndex] = newItem;
